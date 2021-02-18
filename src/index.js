@@ -1,17 +1,43 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import './main.jsx';
+
+class Test extends React.Component {
+    constructor() {
+        super();
+        this.state = {
+            string: "first"
+        }
+        this.updateText();
+    }
+
+    updateText() {
+        setInterval(() => {
+            let strArr = [];
+            for(let i = 0; i < 8; i++) {
+                strArr[i] = String.fromCharCode(Math.floor(Math.random()* 26) + 42);
+            }
+            this.setState({
+                string: strArr.join("")
+            })
+            console.log("New string: "+this.state.string)
+        }, 1000);
+    }
+
+    render() {
+        const {string} = this.state;
+        
+        return (
+            <div>
+                <h1>😎</h1>
+                <h1>{string}</h1>
+            </div>
+        )
+    }
+}
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+    <Test name="test" />,
+    document.getElementById("root")
+)
